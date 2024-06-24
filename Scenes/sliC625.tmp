@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://dejfhe7h21tkm"]
+
+[ext_resource type="Script" path="res://Scripts/slime.gd" id="1_yaqqe"]
+[ext_resource type="Texture2D" uid="uid://cy3m8uhipwkcm" path="res://Assets/Sprites/Slime Gel.png" id="2_fgnbm"]
+[ext_resource type="Script" path="res://Scripts/Components/hurtbox.gd" id="3_f01e0"]
+[ext_resource type="Script" path="res://Scripts/timer_tween.gd" id="3_wpigy"]
+[ext_resource type="Script" path="res://Scripts/uI_slime.gd" id="5_7v2gb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jnnxp"]
+radius = 18.3848
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jragy"]
+radius = 15.5724
+
+[node name="Slime" type="CharacterBody2D"]
+texture_filter = 1
+scale = Vector2(2, 2)
+script = ExtResource("1_yaqqe")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_fgnbm")
+
+[node name="Hurtbox" type="Area2D" parent="Sprite"]
+script = ExtResource("3_f01e0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Hurtbox"]
+position = Vector2(0, 2.5)
+shape = SubResource("CircleShape2D_jnnxp")
+debug_color = Color(0.803922, 0.376471, 0.482353, 0.419608)
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.5)
+shape = SubResource("CircleShape2D_jragy")
+
+[node name="Timer_Tween" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+script = ExtResource("3_wpigy")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -19.5
+offset_right = 20.5
+offset_bottom = 40.0
+scale = Vector2(1.03877, 1)
+script = ExtResource("5_7v2gb")
+
+[node name="Label" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.04112
+offset_top = -1.5
+offset_right = 29.9589
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.317242, 0.317242)
+text = "Hola"
+
+[connection signal="area_entered" from="Sprite/Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="timeout" from="Timer_Tween" to="." method="_on_timer_tween_timeout"]

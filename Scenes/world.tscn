@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnpgfqq4eat46"]
+
+[ext_resource type="Script" path="res://Scripts/control.gd" id="1_7iihf"]
+[ext_resource type="PackedScene" uid="uid://bauibe2gky3es" path="res://Scenes/player.tscn" id="1_wtvxh"]
+[ext_resource type="PackedScene" uid="uid://dejfhe7h21tkm" path="res://Scenes/slime.tscn" id="2_7dy6b"]
+
+[node name="World" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 223.0
+offset_bottom = 223.0
+script = ExtResource("1_7iihf")
+
+[node name="Number_Enemies" type="Label" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "HOLA"
+
+[node name="Player" parent="." instance=ExtResource("1_wtvxh")]
+position = Vector2(565, 294)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Slime" parent="Enemies" instance=ExtResource("2_7dy6b")]
+position = Vector2(807, 442)
+
+[node name="Slime2" parent="Enemies" instance=ExtResource("2_7dy6b")]
+position = Vector2(324, 262)
+
+[node name="Slime3" parent="Enemies" instance=ExtResource("2_7dy6b")]
+position = Vector2(700, 152)
